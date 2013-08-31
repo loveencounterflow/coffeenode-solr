@@ -16752,3 +16752,347 @@ INFO  - 2013-08-26 17:17:43.008; org.apache.solr.core.CachingDirectoryFactory; C
 INFO  - 2013-08-26 17:17:43.008; org.apache.solr.core.CachingDirectoryFactory; looking to close /Volumes/Storage/temp/solr-minimal/example/solr/collection1/data [CachedDir<<refCount=0;path=/Volumes/Storage/temp/solr-minimal/example/solr/collection1/data;done=false>>]
 INFO  - 2013-08-26 17:17:43.008; org.apache.solr.core.CachingDirectoryFactory; Closing directory: /Volumes/Storage/temp/solr-minimal/example/solr/collection1/data
 INFO  - 2013-08-26 17:17:43.009; org.eclipse.jetty.server.handler.ContextHandler; stopped o.e.j.w.WebAppContext{/solr,file:/Volumes/Storage/temp/solr-minimal/example/solr-webapp/webapp/},/Volumes/Storage/temp/solr-minimal/example/webapps/solr.war
+INFO  - 2013-08-31 19:11:43.421; org.eclipse.jetty.server.Server; jetty-8.1.10.v20130312
+INFO  - 2013-08-31 19:11:43.455; org.eclipse.jetty.deploy.providers.ScanningAppProvider; Deployment monitor /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/contexts at interval 0
+INFO  - 2013-08-31 19:11:43.463; org.eclipse.jetty.deploy.DeploymentManager; Deployable added: /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/contexts/solr-jetty-context.xml
+INFO  - 2013-08-31 19:11:44.727; org.eclipse.jetty.webapp.StandardDescriptorProcessor; NO JSP Support for /solr, did not find org.apache.jasper.servlet.JspServlet
+INFO  - 2013-08-31 19:11:44.799; org.apache.solr.servlet.SolrDispatchFilter; SolrDispatchFilter.init()
+INFO  - 2013-08-31 19:11:44.820; org.apache.solr.core.SolrResourceLoader; JNDI not configured for solr (NoInitialContextEx)
+INFO  - 2013-08-31 19:11:44.821; org.apache.solr.core.SolrResourceLoader; solr home defaulted to 'solr/' (could not find system property or JNDI)
+INFO  - 2013-08-31 19:11:44.822; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: 'solr/'
+INFO  - 2013-08-31 19:11:44.918; org.apache.solr.core.ConfigSolr; Loading container configuration from /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/solr.xml
+INFO  - 2013-08-31 19:11:45.052; org.apache.solr.core.SolrCoreDiscoverer; Looking for cores in /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr
+INFO  - 2013-08-31 19:11:45.053; org.apache.solr.core.SolrCoreDiscoverer; Looking for cores in /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/bin
+INFO  - 2013-08-31 19:11:45.053; org.apache.solr.core.SolrCoreDiscoverer; Discovered properties file /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/core.properties, adding to cores
+INFO  - 2013-08-31 19:11:45.059; org.apache.solr.core.CoreContainer; New CoreContainer 404150953
+INFO  - 2013-08-31 19:11:45.060; org.apache.solr.core.CoreContainer; Loading cores into CoreContainer [instanceDir=solr/]
+INFO  - 2013-08-31 19:11:45.074; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting socketTimeout to: 0
+INFO  - 2013-08-31 19:11:45.075; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting urlScheme to: http://
+INFO  - 2013-08-31 19:11:45.077; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting connTimeout to: 0
+INFO  - 2013-08-31 19:11:45.077; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maxConnectionsPerHost to: 20
+INFO  - 2013-08-31 19:11:45.078; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting corePoolSize to: 0
+INFO  - 2013-08-31 19:11:45.078; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maximumPoolSize to: 2147483647
+INFO  - 2013-08-31 19:11:45.078; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maxThreadIdleTime to: 5
+INFO  - 2013-08-31 19:11:45.078; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting sizeOfQueue to: -1
+INFO  - 2013-08-31 19:11:45.079; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting fairnessPolicy to: false
+INFO  - 2013-08-31 19:11:45.084; org.apache.solr.client.solrj.impl.HttpClientUtil; Creating new http client, config:maxConnectionsPerHost=20&maxConnections=10000&socketTimeout=0&connTimeout=0&retry=false
+INFO  - 2013-08-31 19:11:45.277; org.apache.solr.logging.LogWatcher; Registering Log Listener [Log4j (org.slf4j.impl.Log4jLoggerFactory)]
+INFO  - 2013-08-31 19:11:45.302; org.apache.solr.core.CoreContainer; Creating SolrCore 'collection1' using instanceDir: /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1
+INFO  - 2013-08-31 19:11:45.303; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: '/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/'
+INFO  - 2013-08-31 19:11:45.379; org.apache.solr.core.SolrConfig; Adding specified lib dirs to ClassLoader
+INFO  - 2013-08-31 19:11:45.382; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/apache-mime4j-core-0.7.2.jar' to classloader
+INFO  - 2013-08-31 19:11:45.382; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/apache-mime4j-dom-0.7.2.jar' to classloader
+INFO  - 2013-08-31 19:11:45.382; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/bcmail-jdk15-1.45.jar' to classloader
+INFO  - 2013-08-31 19:11:45.383; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/bcprov-jdk15-1.45.jar' to classloader
+INFO  - 2013-08-31 19:11:45.383; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/boilerpipe-1.1.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.383; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/commons-compress-1.4.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.383; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/dom4j-1.6.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.384; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/fontbox-1.8.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.384; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/icu4j-49.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.384; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/isoparser-1.0-RC-1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.385; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/jdom-1.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.385; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/jempbox-1.8.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.385; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/juniversalchardet-1.0.3.jar' to classloader
+INFO  - 2013-08-31 19:11:45.385; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/metadata-extractor-2.6.2.jar' to classloader
+INFO  - 2013-08-31 19:11:45.386; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/netcdf-4.2-min.jar' to classloader
+INFO  - 2013-08-31 19:11:45.386; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/pdfbox-1.8.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.386; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/poi-3.9.jar' to classloader
+INFO  - 2013-08-31 19:11:45.386; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/poi-ooxml-3.9.jar' to classloader
+INFO  - 2013-08-31 19:11:45.387; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/poi-ooxml-schemas-3.9.jar' to classloader
+INFO  - 2013-08-31 19:11:45.387; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/poi-scratchpad-3.9.jar' to classloader
+INFO  - 2013-08-31 19:11:45.387; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/rome-0.9.jar' to classloader
+INFO  - 2013-08-31 19:11:45.388; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/tagsoup-1.2.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.388; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/tika-core-1.4.jar' to classloader
+INFO  - 2013-08-31 19:11:45.388; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/tika-parsers-1.4.jar' to classloader
+INFO  - 2013-08-31 19:11:45.388; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/vorbis-java-core-0.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.389; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/vorbis-java-tika-0.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.389; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/xercesImpl-2.9.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.389; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/xmlbeans-2.3.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.390; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/xz-1.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.391; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/dist/solr-cell-4.4.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.392; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/attributes-binder-1.0.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.392; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/carrot2-mini-3.6.2.jar' to classloader
+INFO  - 2013-08-31 19:11:45.392; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/hppc-0.4.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.393; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/jackson-core-asl-1.7.4.jar' to classloader
+INFO  - 2013-08-31 19:11:45.393; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/jackson-mapper-asl-1.7.4.jar' to classloader
+INFO  - 2013-08-31 19:11:45.393; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/mahout-collections-1.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.394; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/mahout-math-0.6.jar' to classloader
+INFO  - 2013-08-31 19:11:45.394; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/simple-xml-2.6.4.jar' to classloader
+INFO  - 2013-08-31 19:11:45.395; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/dist/solr-clustering-4.4.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.395; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/langid/lib/jsonic-1.2.7.jar' to classloader
+INFO  - 2013-08-31 19:11:45.396; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/langid/lib/langdetect-1.1-20120112.jar' to classloader
+INFO  - 2013-08-31 19:11:45.396; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/dist/solr-langid-4.4.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.397; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/velocity/lib/commons-beanutils-1.7.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.397; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/velocity/lib/commons-collections-3.2.1.jar' to classloader
+INFO  - 2013-08-31 19:11:45.398; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/velocity/lib/velocity-1.7.jar' to classloader
+INFO  - 2013-08-31 19:11:45.398; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/velocity/lib/velocity-tools-2.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.399; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/dist/solr-velocity-4.4.0.jar' to classloader
+INFO  - 2013-08-31 19:11:45.570; org.apache.solr.update.SolrIndexConfig; IndexWriter infoStream solr logging is enabled
+INFO  - 2013-08-31 19:11:45.576; org.apache.solr.core.SolrConfig; Using Lucene MatchVersion: LUCENE_44
+INFO  - 2013-08-31 19:11:45.700; org.apache.solr.core.SolrConfig; Loaded SolrConfig: solrconfig.xml
+INFO  - 2013-08-31 19:11:45.706; org.apache.solr.schema.IndexSchema; Reading Solr Schema from schema.xml
+INFO  - 2013-08-31 19:11:45.796; org.apache.solr.schema.IndexSchema; [collection1] Schema name=example
+INFO  - 2013-08-31 19:11:46.521; org.apache.solr.schema.IndexSchema; unique key field: id
+INFO  - 2013-08-31 19:11:46.599; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-08-31 19:11:46.607; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-08-31 19:11:46.755; org.apache.solr.core.SolrCore; solr.NRTCachingDirectoryFactory
+INFO  - 2013-08-31 19:11:46.761; org.apache.solr.core.SolrCore; [collection1] Opening new SolrCore at /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/, dataDir=/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/data/
+INFO  - 2013-08-31 19:11:46.762; org.apache.solr.core.JmxMonitoredMap; No JMX servers found, not exposing Solr information with JMX.
+INFO  - 2013-08-31 19:11:46.767; org.apache.solr.core.SolrCore; [collection1] Added SolrEventListener for newSearcher: org.apache.solr.core.QuerySenderListener{queries=[]}
+INFO  - 2013-08-31 19:11:46.768; org.apache.solr.core.SolrCore; [collection1] Added SolrEventListener for firstSearcher: org.apache.solr.core.QuerySenderListener{queries=[{q=static firstSearcher warming in solrconfig.xml}]}
+INFO  - 2013-08-31 19:11:46.779; org.apache.solr.core.CachingDirectoryFactory; return new directory for /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/data
+INFO  - 2013-08-31 19:11:46.780; org.apache.solr.core.SolrCore; New index directory detected: old=null new=/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/data/index/
+INFO  - 2013-08-31 19:11:46.780; org.apache.solr.core.CachingDirectoryFactory; return new directory for /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/data/index
+INFO  - 2013-08-31 19:11:46.788; org.apache.solr.core.SolrCore; created json: solr.JSONResponseWriter
+INFO  - 2013-08-31 19:11:46.788; org.apache.solr.core.SolrCore; adding lazy queryResponseWriter: solr.VelocityResponseWriter
+INFO  - 2013-08-31 19:11:46.789; org.apache.solr.core.SolrCore; created velocity: solr.VelocityResponseWriter
+INFO  - 2013-08-31 19:11:46.792; org.apache.solr.core.SolrCore; created xslt: solr.XSLTResponseWriter
+INFO  - 2013-08-31 19:11:46.792; org.apache.solr.response.XSLTResponseWriter; xsltCacheLifetimeSeconds=5
+INFO  - 2013-08-31 19:11:46.873; org.apache.solr.core.RequestHandlers; created /select: solr.SearchHandler
+INFO  - 2013-08-31 19:11:46.873; org.apache.solr.core.RequestHandlers; created /query: solr.SearchHandler
+INFO  - 2013-08-31 19:11:46.875; org.apache.solr.core.RequestHandlers; created /get: solr.RealTimeGetHandler
+INFO  - 2013-08-31 19:11:46.875; org.apache.solr.core.RequestHandlers; created /browse: solr.SearchHandler
+INFO  - 2013-08-31 19:11:46.878; org.apache.solr.core.RequestHandlers; created /update: solr.UpdateRequestHandler
+INFO  - 2013-08-31 19:11:46.879; org.apache.solr.core.RequestHandlers; created /update/json: solr.JsonUpdateRequestHandler
+INFO  - 2013-08-31 19:11:46.881; org.apache.solr.core.RequestHandlers; created /update/csv: solr.CSVRequestHandler
+INFO  - 2013-08-31 19:11:46.881; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-08-31 19:11:46.881; org.apache.solr.core.RequestHandlers; created /update/extract: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-08-31 19:11:46.885; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.FieldAnalysisRequestHandler
+INFO  - 2013-08-31 19:11:46.885; org.apache.solr.core.RequestHandlers; created /analysis/field: solr.FieldAnalysisRequestHandler
+INFO  - 2013-08-31 19:11:46.885; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-08-31 19:11:46.886; org.apache.solr.core.RequestHandlers; created /analysis/document: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-08-31 19:11:46.887; org.apache.solr.core.RequestHandlers; created /admin/: solr.admin.AdminHandlers
+INFO  - 2013-08-31 19:11:46.889; org.apache.solr.core.RequestHandlers; created /admin/ping: solr.PingRequestHandler
+INFO  - 2013-08-31 19:11:46.891; org.apache.solr.core.RequestHandlers; created /debug/dump: solr.DumpRequestHandler
+INFO  - 2013-08-31 19:11:46.899; org.apache.solr.core.RequestHandlers; created /replication: solr.ReplicationHandler
+INFO  - 2013-08-31 19:11:46.899; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-08-31 19:11:46.899; org.apache.solr.core.RequestHandlers; created /tvrh: solr.SearchHandler
+INFO  - 2013-08-31 19:11:46.899; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-08-31 19:11:46.899; org.apache.solr.core.RequestHandlers; created /terms: solr.SearchHandler
+INFO  - 2013-08-31 19:11:46.899; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-08-31 19:11:46.900; org.apache.solr.core.RequestHandlers; created /elevate: solr.SearchHandler
+INFO  - 2013-08-31 19:11:46.914; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-08-31 19:11:46.916; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-08-31 19:11:46.917; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-08-31 19:11:46.946; org.apache.solr.search.SolrIndexSearcher; Opening Searcher@147ae747 main
+INFO  - 2013-08-31 19:11:46.962; org.apache.solr.update.CommitTracker; Hard AutoCommit: if uncommited for 15000ms; 
+INFO  - 2013-08-31 19:11:46.962; org.apache.solr.update.CommitTracker; Soft AutoCommit: disabled
+INFO  - 2013-08-31 19:11:46.962; org.apache.solr.handler.component.SpellCheckComponent; Initializing spell checkers
+INFO  - 2013-08-31 19:11:46.968; org.apache.solr.handler.component.SpellCheckComponent; No queryConverter defined, using default converter
+INFO  - 2013-08-31 19:11:46.970; org.apache.solr.handler.component.QueryElevationComponent; Loading QueryElevation from: /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/conf/elevate.xml
+INFO  - 2013-08-31 19:11:55.112; org.apache.solr.handler.ReplicationHandler; Commits will be reserved for  10000
+INFO  - 2013-08-31 19:11:55.112; org.apache.solr.core.QuerySenderListener; QuerySenderListener sending requests to Searcher@147ae747 main{StandardDirectoryReader(segments_1:1)}
+INFO  - 2013-08-31 19:11:55.113; org.apache.solr.core.CoreContainer; registering core: collection1
+INFO  - 2013-08-31 19:11:55.115; org.apache.solr.servlet.SolrDispatchFilter; user.dir=/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example
+INFO  - 2013-08-31 19:11:55.115; org.apache.solr.servlet.SolrDispatchFilter; SolrDispatchFilter.init() done
+INFO  - 2013-08-31 19:11:55.161; org.apache.solr.core.SolrCore; [collection1] webapp=null path=null params={event=firstSearcher&q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false} hits=0 status=0 QTime=47 
+INFO  - 2013-08-31 19:11:55.162; org.apache.solr.core.QuerySenderListener; QuerySenderListener done.
+INFO  - 2013-08-31 19:11:55.162; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: wordbreak
+INFO  - 2013-08-31 19:11:55.162; org.apache.solr.core.SolrCore; [collection1] Registered new searcher Searcher@147ae747 main{StandardDirectoryReader(segments_1:1)}
+INFO  - 2013-08-31 19:11:55.171; org.eclipse.jetty.server.AbstractConnector; Started SocketConnector@0.0.0.0:8983
+INFO  - 2013-08-31 19:12:19.136; org.apache.solr.servlet.SolrDispatchFilter; [admin] webapp=null path=/admin/cores params={indexInfo=false&_=1377969139103&wt=json} status=0 QTime=1 
+INFO  - 2013-08-31 19:12:19.235; org.apache.solr.core.SolrCore; [collection1] webapp=/solr path=/admin/system params={_=1377969139153&wt=json} status=0 QTime=50 
+INFO  - 2013-08-31 19:13:05.532; org.eclipse.jetty.server.Server; jetty-8.1.10.v20130312
+INFO  - 2013-08-31 19:13:05.560; org.eclipse.jetty.deploy.providers.ScanningAppProvider; Deployment monitor /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/contexts at interval 0
+INFO  - 2013-08-31 19:13:05.568; org.eclipse.jetty.deploy.DeploymentManager; Deployable added: /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/contexts/solr-jetty-context.xml
+INFO  - 2013-08-31 19:13:06.778; org.eclipse.jetty.webapp.StandardDescriptorProcessor; NO JSP Support for /solr, did not find org.apache.jasper.servlet.JspServlet
+INFO  - 2013-08-31 19:13:06.843; org.apache.solr.servlet.SolrDispatchFilter; SolrDispatchFilter.init()
+INFO  - 2013-08-31 19:13:06.863; org.apache.solr.core.SolrResourceLoader; JNDI not configured for solr (NoInitialContextEx)
+INFO  - 2013-08-31 19:13:06.863; org.apache.solr.core.SolrResourceLoader; solr home defaulted to 'solr/' (could not find system property or JNDI)
+INFO  - 2013-08-31 19:13:06.864; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: 'solr/'
+INFO  - 2013-08-31 19:13:06.961; org.apache.solr.core.ConfigSolr; Loading container configuration from /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/solr.xml
+INFO  - 2013-08-31 19:13:07.068; org.apache.solr.core.SolrCoreDiscoverer; Looking for cores in /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr
+INFO  - 2013-08-31 19:13:07.069; org.apache.solr.core.SolrCoreDiscoverer; Looking for cores in /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/bin
+INFO  - 2013-08-31 19:13:07.070; org.apache.solr.core.SolrCoreDiscoverer; Discovered properties file /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/core.properties, adding to cores
+INFO  - 2013-08-31 19:13:07.075; org.apache.solr.core.CoreContainer; New CoreContainer 303243765
+INFO  - 2013-08-31 19:13:07.076; org.apache.solr.core.CoreContainer; Loading cores into CoreContainer [instanceDir=solr/]
+INFO  - 2013-08-31 19:13:07.090; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting socketTimeout to: 0
+INFO  - 2013-08-31 19:13:07.090; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting urlScheme to: http://
+INFO  - 2013-08-31 19:13:07.092; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting connTimeout to: 0
+INFO  - 2013-08-31 19:13:07.092; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maxConnectionsPerHost to: 20
+INFO  - 2013-08-31 19:13:07.093; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting corePoolSize to: 0
+INFO  - 2013-08-31 19:13:07.093; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maximumPoolSize to: 2147483647
+INFO  - 2013-08-31 19:13:07.093; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting maxThreadIdleTime to: 5
+INFO  - 2013-08-31 19:13:07.093; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting sizeOfQueue to: -1
+INFO  - 2013-08-31 19:13:07.094; org.apache.solr.handler.component.HttpShardHandlerFactory; Setting fairnessPolicy to: false
+INFO  - 2013-08-31 19:13:07.100; org.apache.solr.client.solrj.impl.HttpClientUtil; Creating new http client, config:maxConnectionsPerHost=20&maxConnections=10000&socketTimeout=0&connTimeout=0&retry=false
+INFO  - 2013-08-31 19:13:07.277; org.apache.solr.logging.LogWatcher; Registering Log Listener [Log4j (org.slf4j.impl.Log4jLoggerFactory)]
+INFO  - 2013-08-31 19:13:07.300; org.apache.solr.core.CoreContainer; Creating SolrCore 'collection1' using instanceDir: /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1
+INFO  - 2013-08-31 19:13:07.300; org.apache.solr.core.SolrResourceLoader; new SolrResourceLoader for directory: '/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/'
+INFO  - 2013-08-31 19:13:07.372; org.apache.solr.core.SolrConfig; Adding specified lib dirs to ClassLoader
+INFO  - 2013-08-31 19:13:07.374; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/apache-mime4j-core-0.7.2.jar' to classloader
+INFO  - 2013-08-31 19:13:07.375; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/apache-mime4j-dom-0.7.2.jar' to classloader
+INFO  - 2013-08-31 19:13:07.375; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/bcmail-jdk15-1.45.jar' to classloader
+INFO  - 2013-08-31 19:13:07.375; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/bcprov-jdk15-1.45.jar' to classloader
+INFO  - 2013-08-31 19:13:07.376; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/boilerpipe-1.1.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.376; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/commons-compress-1.4.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.376; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/dom4j-1.6.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.377; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/fontbox-1.8.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.377; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/icu4j-49.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.377; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/isoparser-1.0-RC-1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.377; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/jdom-1.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.378; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/jempbox-1.8.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.378; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/juniversalchardet-1.0.3.jar' to classloader
+INFO  - 2013-08-31 19:13:07.378; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/metadata-extractor-2.6.2.jar' to classloader
+INFO  - 2013-08-31 19:13:07.378; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/netcdf-4.2-min.jar' to classloader
+INFO  - 2013-08-31 19:13:07.379; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/pdfbox-1.8.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.379; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/poi-3.9.jar' to classloader
+INFO  - 2013-08-31 19:13:07.379; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/poi-ooxml-3.9.jar' to classloader
+INFO  - 2013-08-31 19:13:07.379; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/poi-ooxml-schemas-3.9.jar' to classloader
+INFO  - 2013-08-31 19:13:07.380; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/poi-scratchpad-3.9.jar' to classloader
+INFO  - 2013-08-31 19:13:07.380; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/rome-0.9.jar' to classloader
+INFO  - 2013-08-31 19:13:07.380; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/tagsoup-1.2.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.381; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/tika-core-1.4.jar' to classloader
+INFO  - 2013-08-31 19:13:07.381; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/tika-parsers-1.4.jar' to classloader
+INFO  - 2013-08-31 19:13:07.381; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/vorbis-java-core-0.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.381; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/vorbis-java-tika-0.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.382; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/xercesImpl-2.9.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.382; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/xmlbeans-2.3.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.382; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/extraction/lib/xz-1.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.383; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/dist/solr-cell-4.4.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.384; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/attributes-binder-1.0.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.384; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/carrot2-mini-3.6.2.jar' to classloader
+INFO  - 2013-08-31 19:13:07.385; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/hppc-0.4.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.385; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/jackson-core-asl-1.7.4.jar' to classloader
+INFO  - 2013-08-31 19:13:07.385; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/jackson-mapper-asl-1.7.4.jar' to classloader
+INFO  - 2013-08-31 19:13:07.385; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/mahout-collections-1.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.386; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/mahout-math-0.6.jar' to classloader
+INFO  - 2013-08-31 19:13:07.386; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/clustering/lib/simple-xml-2.6.4.jar' to classloader
+INFO  - 2013-08-31 19:13:07.387; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/dist/solr-clustering-4.4.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.387; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/langid/lib/jsonic-1.2.7.jar' to classloader
+INFO  - 2013-08-31 19:13:07.388; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/langid/lib/langdetect-1.1-20120112.jar' to classloader
+INFO  - 2013-08-31 19:13:07.388; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/dist/solr-langid-4.4.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.389; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/velocity/lib/commons-beanutils-1.7.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.389; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/velocity/lib/commons-collections-3.2.1.jar' to classloader
+INFO  - 2013-08-31 19:13:07.390; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/velocity/lib/velocity-1.7.jar' to classloader
+INFO  - 2013-08-31 19:13:07.390; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/contrib/velocity/lib/velocity-tools-2.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.391; org.apache.solr.core.SolrResourceLoader; Adding 'file:/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/dist/solr-velocity-4.4.0.jar' to classloader
+INFO  - 2013-08-31 19:13:07.521; org.apache.solr.update.SolrIndexConfig; IndexWriter infoStream solr logging is enabled
+INFO  - 2013-08-31 19:13:07.526; org.apache.solr.core.SolrConfig; Using Lucene MatchVersion: LUCENE_44
+INFO  - 2013-08-31 19:13:07.649; org.apache.solr.core.SolrConfig; Loaded SolrConfig: solrconfig.xml
+INFO  - 2013-08-31 19:13:07.654; org.apache.solr.schema.IndexSchema; Reading Solr Schema from schema.xml
+INFO  - 2013-08-31 19:13:07.743; org.apache.solr.schema.IndexSchema; [collection1] Schema name=example
+INFO  - 2013-08-31 19:13:08.453; org.apache.solr.schema.IndexSchema; unique key field: id
+INFO  - 2013-08-31 19:13:08.516; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-08-31 19:13:08.524; org.apache.solr.schema.FileExchangeRateProvider; Reloading exchange rates from file currency.xml
+INFO  - 2013-08-31 19:13:08.657; org.apache.solr.core.SolrCore; solr.NRTCachingDirectoryFactory
+INFO  - 2013-08-31 19:13:08.663; org.apache.solr.core.SolrCore; [collection1] Opening new SolrCore at /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/, dataDir=/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/data/
+INFO  - 2013-08-31 19:13:08.664; org.apache.solr.core.JmxMonitoredMap; No JMX servers found, not exposing Solr information with JMX.
+INFO  - 2013-08-31 19:13:08.668; org.apache.solr.core.SolrCore; [collection1] Added SolrEventListener for newSearcher: org.apache.solr.core.QuerySenderListener{queries=[]}
+INFO  - 2013-08-31 19:13:08.668; org.apache.solr.core.SolrCore; [collection1] Added SolrEventListener for firstSearcher: org.apache.solr.core.QuerySenderListener{queries=[{q=static firstSearcher warming in solrconfig.xml}]}
+INFO  - 2013-08-31 19:13:08.679; org.apache.solr.core.CachingDirectoryFactory; return new directory for /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/data
+INFO  - 2013-08-31 19:13:08.679; org.apache.solr.core.SolrCore; New index directory detected: old=null new=/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/data/index/
+INFO  - 2013-08-31 19:13:08.680; org.apache.solr.core.CachingDirectoryFactory; return new directory for /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/data/index
+INFO  - 2013-08-31 19:13:08.688; org.apache.solr.core.SolrCore; created json: solr.JSONResponseWriter
+INFO  - 2013-08-31 19:13:08.688; org.apache.solr.core.SolrCore; adding lazy queryResponseWriter: solr.VelocityResponseWriter
+INFO  - 2013-08-31 19:13:08.689; org.apache.solr.core.SolrCore; created velocity: solr.VelocityResponseWriter
+INFO  - 2013-08-31 19:13:08.691; org.apache.solr.core.SolrCore; created xslt: solr.XSLTResponseWriter
+INFO  - 2013-08-31 19:13:08.692; org.apache.solr.response.XSLTResponseWriter; xsltCacheLifetimeSeconds=5
+INFO  - 2013-08-31 19:13:08.769; org.apache.solr.core.RequestHandlers; created /select: solr.SearchHandler
+INFO  - 2013-08-31 19:13:08.769; org.apache.solr.core.RequestHandlers; created /query: solr.SearchHandler
+INFO  - 2013-08-31 19:13:08.771; org.apache.solr.core.RequestHandlers; created /get: solr.RealTimeGetHandler
+INFO  - 2013-08-31 19:13:08.771; org.apache.solr.core.RequestHandlers; created /browse: solr.SearchHandler
+INFO  - 2013-08-31 19:13:08.773; org.apache.solr.core.RequestHandlers; created /update: solr.UpdateRequestHandler
+INFO  - 2013-08-31 19:13:08.775; org.apache.solr.core.RequestHandlers; created /update/json: solr.JsonUpdateRequestHandler
+INFO  - 2013-08-31 19:13:08.776; org.apache.solr.core.RequestHandlers; created /update/csv: solr.CSVRequestHandler
+INFO  - 2013-08-31 19:13:08.776; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-08-31 19:13:08.777; org.apache.solr.core.RequestHandlers; created /update/extract: solr.extraction.ExtractingRequestHandler
+INFO  - 2013-08-31 19:13:08.789; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.FieldAnalysisRequestHandler
+INFO  - 2013-08-31 19:13:08.790; org.apache.solr.core.RequestHandlers; created /analysis/field: solr.FieldAnalysisRequestHandler
+INFO  - 2013-08-31 19:13:08.790; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-08-31 19:13:08.790; org.apache.solr.core.RequestHandlers; created /analysis/document: solr.DocumentAnalysisRequestHandler
+INFO  - 2013-08-31 19:13:08.792; org.apache.solr.core.RequestHandlers; created /admin/: solr.admin.AdminHandlers
+INFO  - 2013-08-31 19:13:08.794; org.apache.solr.core.RequestHandlers; created /admin/ping: solr.PingRequestHandler
+INFO  - 2013-08-31 19:13:08.795; org.apache.solr.core.RequestHandlers; created /debug/dump: solr.DumpRequestHandler
+INFO  - 2013-08-31 19:13:08.803; org.apache.solr.core.RequestHandlers; created /replication: solr.ReplicationHandler
+INFO  - 2013-08-31 19:13:08.803; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-08-31 19:13:08.804; org.apache.solr.core.RequestHandlers; created /tvrh: solr.SearchHandler
+INFO  - 2013-08-31 19:13:08.804; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-08-31 19:13:08.804; org.apache.solr.core.RequestHandlers; created /terms: solr.SearchHandler
+INFO  - 2013-08-31 19:13:08.804; org.apache.solr.core.RequestHandlers; adding lazy requestHandler: solr.SearchHandler
+INFO  - 2013-08-31 19:13:08.804; org.apache.solr.core.RequestHandlers; created /elevate: solr.SearchHandler
+INFO  - 2013-08-31 19:13:08.819; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-08-31 19:13:08.821; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-08-31 19:13:08.822; org.apache.solr.handler.loader.XMLLoader; xsltCacheLifetimeSeconds=60
+INFO  - 2013-08-31 19:13:08.847; org.apache.solr.search.SolrIndexSearcher; Opening Searcher@42ebaf12 main
+INFO  - 2013-08-31 19:13:08.862; org.apache.solr.update.CommitTracker; Hard AutoCommit: if uncommited for 15000ms; 
+INFO  - 2013-08-31 19:13:08.863; org.apache.solr.update.CommitTracker; Soft AutoCommit: disabled
+INFO  - 2013-08-31 19:13:08.863; org.apache.solr.handler.component.SpellCheckComponent; Initializing spell checkers
+INFO  - 2013-08-31 19:13:08.869; org.apache.solr.handler.component.SpellCheckComponent; No queryConverter defined, using default converter
+INFO  - 2013-08-31 19:13:08.871; org.apache.solr.handler.component.QueryElevationComponent; Loading QueryElevation from: /Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/conf/elevate.xml
+INFO  - 2013-08-31 19:13:08.921; org.apache.solr.handler.ReplicationHandler; Commits will be reserved for  10000
+INFO  - 2013-08-31 19:13:08.922; org.apache.solr.core.QuerySenderListener; QuerySenderListener sending requests to Searcher@42ebaf12 main{StandardDirectoryReader(segments_1:1)}
+INFO  - 2013-08-31 19:13:08.922; org.apache.solr.core.CoreContainer; registering core: collection1
+INFO  - 2013-08-31 19:13:08.924; org.apache.solr.servlet.SolrDispatchFilter; user.dir=/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example
+INFO  - 2013-08-31 19:13:08.924; org.apache.solr.servlet.SolrDispatchFilter; SolrDispatchFilter.init() done
+WARN  - 2013-08-31 19:13:08.965; org.eclipse.jetty.util.component.AbstractLifeCycle; FAILED SocketConnector@0.0.0.0:8983: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at java.net.ServerSocket.<init>(ServerSocket.java:150)
+	at org.eclipse.jetty.server.bio.SocketConnector.newServerSocket(SocketConnector.java:96)
+	at org.eclipse.jetty.server.bio.SocketConnector.open(SocketConnector.java:85)
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316)
+	at org.eclipse.jetty.server.bio.SocketConnector.doStart(SocketConnector.java:156)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:291)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.xml.XmlConfiguration$1.run(XmlConfiguration.java:1259)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.jetty.xml.XmlConfiguration.main(XmlConfiguration.java:1182)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.jetty.start.Main.invokeMain(Main.java:473)
+	at org.eclipse.jetty.start.Main.start(Main.java:615)
+	at org.eclipse.jetty.start.Main.main(Main.java:96)
+WARN  - 2013-08-31 19:13:08.968; org.eclipse.jetty.util.component.AbstractLifeCycle; FAILED org.eclipse.jetty.server.Server@10d39c9f: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at java.net.PlainSocketImpl.socketBind(Native Method)
+	at java.net.PlainSocketImpl.bind(PlainSocketImpl.java:383)
+	at java.net.ServerSocket.bind(ServerSocket.java:328)
+	at java.net.ServerSocket.<init>(ServerSocket.java:194)
+	at java.net.ServerSocket.<init>(ServerSocket.java:150)
+	at org.eclipse.jetty.server.bio.SocketConnector.newServerSocket(SocketConnector.java:96)
+	at org.eclipse.jetty.server.bio.SocketConnector.open(SocketConnector.java:85)
+	at org.eclipse.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316)
+	at org.eclipse.jetty.server.bio.SocketConnector.doStart(SocketConnector.java:156)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.server.Server.doStart(Server.java:291)
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.eclipse.jetty.xml.XmlConfiguration$1.run(XmlConfiguration.java:1259)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.jetty.xml.XmlConfiguration.main(XmlConfiguration.java:1182)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.eclipse.jetty.start.Main.invokeMain(Main.java:473)
+	at org.eclipse.jetty.start.Main.start(Main.java:615)
+	at org.eclipse.jetty.start.Main.main(Main.java:96)
+INFO  - 2013-08-31 19:13:08.969; org.apache.solr.core.SolrCore; [collection1] webapp=null path=null params={event=firstSearcher&q=static+firstSearcher+warming+in+solrconfig.xml&distrib=false} hits=0 status=0 QTime=46 
+INFO  - 2013-08-31 19:13:08.997; org.apache.solr.core.QuerySenderListener; QuerySenderListener done.
+INFO  - 2013-08-31 19:13:08.998; org.apache.solr.handler.component.SpellCheckComponent$SpellCheckerListener; Loading spell index for spellchecker: wordbreak
+INFO  - 2013-08-31 19:13:08.998; org.apache.solr.core.SolrCore; [collection1] Registered new searcher Searcher@42ebaf12 main{StandardDirectoryReader(segments_1:1)}
+INFO  - 2013-08-31 19:25:09.811; org.apache.solr.update.DirectUpdateHandler2; start commit{,optimize=false,openSearcher=true,waitSearcher=true,expungeDeletes=false,softCommit=false,prepareCommit=false}
+INFO  - 2013-08-31 19:25:09.847; org.apache.solr.core.SolrDeletionPolicy; SolrDeletionPolicy.onInit: commits: num=1
+	commit{dir=NRTCachingDirectory(org.apache.lucene.store.NIOFSDirectory@/Users/flow/cnd/node_modules/coffeenode-solr/solr-minimal/example/solr/collection1/data/index lockFactory=org.apache.lucene.store.NativeFSLockFactory@3bd85e85; maxCacheMB=48.0 maxMergeSizeMB=4.0),segFN=segments_1,generation=1}
+INFO  - 2013-08-31 19:25:09.847; org.apache.solr.core.SolrDeletionPolicy; newest commit generation = 1
+INFO  - 2013-08-31 19:25:09.848; org.apache.solr.update.DirectUpdateHandler2; No uncommitted changes. Skipping IW.commit.
+INFO  - 2013-08-31 19:25:09.849; org.apache.solr.search.SolrIndexSearcher; Opening Searcher@51bfa303 main
+INFO  - 2013-08-31 19:25:09.851; org.apache.solr.update.DirectUpdateHandler2; end_commit_flush
+INFO  - 2013-08-31 19:25:09.851; org.apache.solr.core.QuerySenderListener; QuerySenderListener sending requests to Searcher@51bfa303 main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-08-31 19:25:09.851; org.apache.solr.core.QuerySenderListener; QuerySenderListener done.
+INFO  - 2013-08-31 19:25:09.851; org.apache.solr.core.SolrCore; [collection1] Registered new searcher Searcher@51bfa303 main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-08-31 19:25:09.852; org.apache.solr.update.processor.LogUpdateProcessor; [collection1] webapp=/solr path=/update/json params={commit=true} {commit=} 0 45
+INFO  - 2013-08-31 19:26:34.017; org.apache.solr.update.DirectUpdateHandler2; start commit{,optimize=false,openSearcher=true,waitSearcher=true,expungeDeletes=false,softCommit=false,prepareCommit=false}
+INFO  - 2013-08-31 19:26:34.017; org.apache.solr.update.DirectUpdateHandler2; No uncommitted changes. Skipping IW.commit.
+INFO  - 2013-08-31 19:26:34.018; org.apache.solr.search.SolrIndexSearcher; Opening Searcher@15f7dbd8 main
+INFO  - 2013-08-31 19:26:34.019; org.apache.solr.update.DirectUpdateHandler2; end_commit_flush
+INFO  - 2013-08-31 19:26:34.019; org.apache.solr.core.QuerySenderListener; QuerySenderListener sending requests to Searcher@15f7dbd8 main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-08-31 19:26:34.019; org.apache.solr.core.QuerySenderListener; QuerySenderListener done.
+INFO  - 2013-08-31 19:26:34.019; org.apache.solr.core.SolrCore; [collection1] Registered new searcher Searcher@15f7dbd8 main{StandardDirectoryReader(segments_1:1:nrt)}
+INFO  - 2013-08-31 19:26:34.019; org.apache.solr.update.processor.LogUpdateProcessor; [collection1] webapp=/solr path=/update/json params={commit=true} {commit=} 0 2

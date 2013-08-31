@@ -4,7 +4,7 @@
   "description": "A minimal Solr distro + HTPP / JSON API for building Lucene document stores",
   "main": "lib/main.js",
   "scripts": {
-    "test": "lib/tests.js"
+    "test": "node --harmony lib/tests.js"
   },
   "repository": {
     "type": "git",

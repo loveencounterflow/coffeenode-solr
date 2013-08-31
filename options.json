@@ -1,4 +1,11 @@
 
 
-{}
+{
+  "protocol":     "http",
+  "hostname":     "localhost",
+  "port":         "8983",
+  "base-route":   "solr",
+  "url":          null
+
+}
 
