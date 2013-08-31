@@ -22,7 +22,11 @@
     "url": "https://github.com/loveencounterflow/coffeenode-solr/issues"
   },
   "dependencies": {
-    "coffee-script": "~1.6.3"
+    "coffee-script": "~1.6.3",
+    "coffeenode-text": "~0.1.1",
+    "coffeenode-types": "~0.1.0",
+    "coffeenode-suspend": "~0.1.3",
+    "request": "~2.27.0"
   },
   "larq": {
     "extensions": {},
