@@ -1,0 +1,39 @@
+{
+  "name": "coffeenode-solr",
+  "version": "0.0.1",
+  "description": "A minimal Solr distro + HTPP / JSON API for building Lucene document stores",
+  "main": "lib/main.js",
+  "scripts": {
+    "test": "lib/tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loveencounterflow/coffeenode-solr.git"
+  },
+  "keywords": [
+    "solr",
+    "lucene",
+    "coffeenode",
+    "coffeescript"
+  ],
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/loveencounterflow/coffeenode-solr/issues"
+  },
+  "dependencies": {
+    "coffee-script": "~1.6.3"
+  },
+  "larq": {
+    "extensions": {},
+    "compile-statements": {},
+    "%cache": {
+      "routes": {
+        "lib/main.js": 1,
+        "lib/tests.js": 1
+      }
+    }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "coffeenode-solr@0.0.1"
+}
