@@ -99,7 +99,17 @@
        replication is in use, this should match the replication
        configuration.
     -->
-  <dataDir>${solr.data.dir:}</dataDir>
+
+  <!-- Solr default setting -->
+  <!-- <dataDir>${solr.data.dir:}</dataDir> -->
+
+  <!--  setting for using coffeenode-solr in other projects;
+        this will create a data directory in the project folder -->
+  <!-- <dataDir>../../../../data</dataDir> -->
+
+  <!-- setting for coffeenode-solr development -->
+  <dataDir>../../data</dataDir>
+  <!-- <dataDir>/Users/flow/cnd/node_modules/coffeenode-solr/data</dataDir> -->
 
 
   <!-- The DirectoryFactory to use for indexes.

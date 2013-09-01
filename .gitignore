@@ -1,4 +1,5 @@
 
+data/
 solr-minimal/example/solr/collection1/data/*
 !solr-minimal/example/solr/collection1/data/keepme
 solr-minimal/example/logs

@@ -59,12 +59,33 @@ assert                    = require 'assert'
   ### TAINT only works on otherwise empty DB after @ok_update_command has been run
   ###
   db = SOLR.new_db hostname: '127.0.0.1'
-  # log TRM.steel db
+  #=========================================================================================================
   step ( resume ) =>*
-    response  = yield SOLR._search db, '*:*', resume
-    delete response[ 'dt' ]
-    # log TRM.pink JSON.stringify response
+    response  = yield SOLR._search db, '*:*', null, resume
+    #.......................................................................................................
     for document in response[ 'results' ]
+      assert.equal document[ 'id' ], '1234'
+      assert.equal document[ 'name' ], 'I. C. Wiener'
+    test.done()
+
+#-----------------------------------------------------------------------------------------------------------
+@high_level_search = ( test ) ->
+  ### TAINT only works on otherwise empty DB after @ok_update_command has been run
+  ###
+  db = SOLR.new_db hostname: '127.0.0.1'
+  #=========================================================================================================
+  step ( resume ) =>*
+    #.......................................................................................................
+    options =
+      'sort':           'score asc'
+      'first-idx':      0
+      'result-count':   50
+    #.......................................................................................................
+    response  = yield SOLR.search db, '*:*', resume
+    log TRM.rainbow response
+    #.......................................................................................................
+    for document in response[ 'results' ]
+      # log TRM.rainbow document
       assert.equal document[ 'id' ], '1234'
       assert.equal document[ 'name' ], 'I. C. Wiener'
     test.done()
@@ -83,10 +104,11 @@ assert                    = require 'assert'
 ############################################################################################################
 # async_testing @main
 
-# test = done: ->
-# # @wrong_update_command test
-# # @ok_update_command test
+test = done: ->
+# @wrong_update_command test
+# @ok_update_command test
 # @low_level_search test
+# @high_level_search test
 
 
 

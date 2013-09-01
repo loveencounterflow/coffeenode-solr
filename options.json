@@ -5,7 +5,7 @@
   "hostname":     "localhost",
   "port":         "8983",
   "base-route":   "solr",
-  "url":          null
-
+  "url":          null,
+  "result-count":	50
 }
 
