@@ -4,7 +4,7 @@
   "description": "A minimal Solr distro + HTPP / JSON API for building Lucene document stores",
   "main": "lib/main.js",
   "scripts": {
-    "test": "node --harmony lib/tests.js"
+    "test": "./node_modules/.bin/asynct lib/tests.js"
   },
   "repository": {
     "type": "git",
@@ -39,5 +39,8 @@
     }
   },
   "readme": "ERROR: No README data found!",
-  "_id": "coffeenode-solr@0.0.1"
+  "_id": "coffeenode-solr@0.0.1",
+  "devDependencies": {
+    "asynct": "~1.1.0"
+  }
 }

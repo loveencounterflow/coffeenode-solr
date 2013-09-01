@@ -62,6 +62,34 @@ default_options           = require '../options'
 
 
 #===========================================================================================================
+# RESPONSE CREATION
+#-----------------------------------------------------------------------------------------------------------
+@_new_response = ( me, http_response ) ->
+  ### TAINT need to examine status code ###
+  # log TRM.orange ( name for name of http_response ).sort()
+  # log TRM.yellow ( name for name of http_response[ 'request' ] ).sort()
+  http_request  = http_response[ 'request' ]
+  request_url   = http_request[ 'href' ]
+  http_status   = http_response[ 'statusCode' ]
+  body          = http_response[ 'body' ]
+  error         = body[ 'error' ] ? null
+  is_error      = error? or ( http_status isnt '200' )
+  log TRM.steel http_status
+  log TRM.red error if error?
+  log is_error
+  #.........................................................................................................
+  R =
+    '~isa':         'SOLR/response'
+    'request-url':  request_url
+    'http-status':  http_status
+    'is-error':     is_error
+    'error':        error
+    'results':      []
+  #.........................................................................................................
+  return R
+
+
+#===========================================================================================================
 #
 #-----------------------------------------------------------------------------------------------------------
 
@@ -282,18 +310,22 @@ default_options           = require '../options'
     # headers:
     #   'Content-type':   'text/json'
     url:      url
+    json:     document
     qs:
       commit: true
-      # wt:     'json'
+      wt:     'json'
       # q:      q
       # hl:     true
       # 'hl.fl':  'address_s'
       # rows:   30
   #=========================================================================================================
-  log '©7e7', TRM.pink options
-  mik_request options, ( error, response) =>
+  mik_request.post options, ( error, response ) =>
     return handler error if error?
-    handler null, response
+    Z = @_new_response me, response
+    if Z[ 'is-error' ]
+      handler new Error Z[ 'error' ][ 'msg' ]
+    else
+      handler null, Z
   #.........................................................................................................
   return null
 

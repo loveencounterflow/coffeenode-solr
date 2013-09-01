@@ -22,22 +22,48 @@ immediately               = setImmediate
 spawn                     = ( require 'child_process' ).spawn
 #...........................................................................................................
 default_options           = require '../options'
+assert                    = require 'assert'
+
 
 #-----------------------------------------------------------------------------------------------------------
-@main = ->
+@wrong_update_command = ( test ) ->
   db = SOLR.new_db hostname: '127.0.0.1'
   log TRM.steel db
   step ( resume ) =>*
     document =
       'id':       '1234'
       'name':     'I. C. Wiener'
-    response = yield SOLR.update db, document, resume
-    log TRM.pink response
+    try
+      response = yield SOLR.update db, document, resume
+    catch error
+      test.done() if ( error[ 'message' ].match /^Unknown command: id/ )?
+
+#-----------------------------------------------------------------------------------------------------------
+@ok_update_command = ( test ) ->
+  db = SOLR.new_db hostname: '127.0.0.1'
+  log TRM.steel db
+  step ( resume ) =>*
+    document =
+      'id':       '1234'
+      'name':     'I. C. Wiener'
+    documents = [ document, ]
+    try
+      response = yield SOLR.update db, documents, resume
+    catch error
+      test.done() if ( error[ 'message' ].match /^Unknown command: id/ )?
+
+
+#-----------------------------------------------------------------------------------------------------------
+# @main = ( test ) ->
+#   wrong_update_command test
+  # assert.throws ( step ( resume ) =>* yield @wrong_update_command resume ), /^Error: Unknown command: id/
+
+
+
+
+
+
 
 ############################################################################################################
-do @main
-
-
-
-
+# async_testing @main
 
