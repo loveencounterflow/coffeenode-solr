@@ -33,7 +33,8 @@ default_options           = require '../options'
   #.........................................................................................................
   ### TAINT: these routes shoud be mage configurable ###
   route_by_name =
-    'update/json':    'update/json'
+    'update':         'update/json'
+    'query':          'select'
   #.........................................................................................................
   for name, default_value of default_options
     R[ name ] = user_options[ name ] ? default_value
@@ -57,34 +58,6 @@ default_options           = require '../options'
   R =
     '~isa':       'SOLR/db'
     'options':    options
-  #.........................................................................................................
-  return R
-
-
-#===========================================================================================================
-# RESPONSE CREATION
-#-----------------------------------------------------------------------------------------------------------
-@_new_response = ( me, http_response ) ->
-  ### TAINT need to examine status code ###
-  # log TRM.orange ( name for name of http_response ).sort()
-  # log TRM.yellow ( name for name of http_response[ 'request' ] ).sort()
-  http_request  = http_response[ 'request' ]
-  request_url   = http_request[ 'href' ]
-  http_status   = http_response[ 'statusCode' ]
-  body          = http_response[ 'body' ]
-  error         = body[ 'error' ] ? null
-  is_error      = error? or ( http_status isnt '200' )
-  log TRM.steel http_status
-  log TRM.red error if error?
-  log is_error
-  #.........................................................................................................
-  R =
-    '~isa':         'SOLR/response'
-    'request-url':  request_url
-    'http-status':  http_status
-    'is-error':     is_error
-    'error':        error
-    'results':      []
   #.........................................................................................................
   return R
 
@@ -266,80 +239,131 @@ default_options           = require '../options'
 
 #-----------------------------------------------------------------------------------------------------------
 # @search = ( postcode, city, street, address, handler ) ->
-@search = ( web_query, format, term_joiner, handler ) ->
-  # return handler null, null unless city? or street?
-  # query = @solr_query_from_web_query postcode, city, street, address
-  [ is_detailed
-    norms
-    solr_query ] = @solr_query_from_web_query web_query, format, term_joiner
-  log TRM.steel '©6z3', solr_query
-  return handler null, null unless solr_query?
-  #=========================================================================================================
-  request solr_query, ( error, response ) =>
-    # log error
-    return handler error if error?
-    #.......................................................................................................
-    response            = JSON.parse response[ 'body' ]
-    header              = response[ 'responseHeader' ]
-    error               = response[ 'error' ]
-    return handler error[ 'msg' ] ? error[ 'trace' ] if error?
-    result              = response[ 'response' ]
-    log TRM.pink  response[ 'highlighting' ]
-    # log TRM.pink result
-    #.....................................................................................................
-    Z =
-      'dt':             header[ 'QTime' ]
-      'web-query':      web_query
-      'solr-query':     solr_query
-      'hit-count':      result[ 'numFound' ]
-      'first-idx':      result[ 'start' ]
-      'is-detailed':    is_detailed
-      'entries':        result[ 'docs' ]
-    #.......................................................................................................
-    # log '©6z9', TRM.gold is_detailed
-    #.......................................................................................................
-    handler null, Z
+# @search = ( web_query, format, term_joiner, handler ) ->
+#   # return handler null, null unless city? or street?
+#   # query = @solr_query_from_web_query postcode, city, street, address
+#   [ is_detailed
+#     norms
+#     solr_query ] = @solr_query_from_web_query web_query, format, term_joiner
+#   log TRM.steel '©6z3', solr_query
+#   return handler null, null unless solr_query?
+#   #=========================================================================================================
+#   request solr_query, ( error, response ) =>
+#     # log error
+#     return handler error if error?
+#     #.......................................................................................................
+#     response            = JSON.parse response[ 'body' ]
+#     header              = response[ 'responseHeader' ]
+#     error               = response[ 'error' ]
+#     return handler error[ 'msg' ] ? error[ 'trace' ] if error?
+#     result              = response[ 'response' ]
+#     log TRM.pink  response[ 'highlighting' ]
+#     # log TRM.pink result
+#     #.....................................................................................................
+#     Z =
+#       'dt':             header[ 'QTime' ]
+#       'web-query':      web_query
+#       'solr-query':     solr_query
+#       'hit-count':      result[ 'numFound' ]
+#       'first-idx':      result[ 'start' ]
+#       'is-detailed':    is_detailed
+#       'entries':        result[ 'docs' ]
+#     #.......................................................................................................
+#     # log '©6z9', TRM.gold is_detailed
+#     #.......................................................................................................
+#     handler null, Z
+
+
+#===========================================================================================================
+# SEARCH
+#-----------------------------------------------------------------------------------------------------------
+@_search = ( me, solr_query, handler ) ->
+  #.........................................................................................................
+  options =
+    url:      me[ 'options' ][ 'urls' ][ 'query' ]
+    json:     true
+    body:     ''
+    # headers:
+    #   'Content-type': 'application/json'
+    qs:
+      q:      solr_query
+      wt:     'json'
+      rows:   30
+  #.........................................................................................................
+  @_request me, 'get', options, handler
+  return null
+
 
 #===========================================================================================================
 # UPDATES
 #-----------------------------------------------------------------------------------------------------------
-@update = ( me, document, handler ) ->
-  url     = me[ 'options' ][ 'urls' ][ 'update/json' ]
+@update = ( me, documents, handler ) ->
   #.........................................................................................................
   options =
-    # headers:
-    #   'Content-type':   'text/json'
-    url:      url
-    json:     document
+    url:      me[ 'options' ][ 'urls' ][ 'update' ]
+    json:     true
+    body:     documents
     qs:
       commit: true
       wt:     'json'
-      # q:      q
-      # hl:     true
-      # 'hl.fl':  'address_s'
-      # rows:   30
+  #.........................................................................................................
+  @_request me, 'post', options, handler
+  return null
+
+#===========================================================================================================
+# REQUEST HANDLER
+#-----------------------------------------------------------------------------------------------------------
+@_request = ( me, method, options, handler ) ->
   #=========================================================================================================
-  mik_request.post options, ( error, response ) =>
+  mik_request[ method ] options, ( error, response ) =>
     return handler error if error?
     Z = @_new_response me, response
-    if Z[ 'is-error' ]
-      handler new Error Z[ 'error' ][ 'msg' ]
-    else
-      handler null, Z
+    if Z[ 'error' ] is null then handler null, Z else handler new Error Z[ 'error' ][ 'msg' ]
   #.........................................................................................................
   return null
 
-# #-----------------------------------------------------------------------------------------------------------
-# @update_from_file = ( me, route ) ->
-#   url     = me[ 'options' ][ 'urls' ][ 'update/json' ]
-#   stream  = njs_fs.createReadStream route
-#   stream.pipe request.post url
-#   #.........................................................................................................
-#   stream.on 'error', =>
-#     handler null
-#   #.........................................................................................................
-#   stream.on 'finish', =>
-#     handler null
+#-----------------------------------------------------------------------------------------------------------
+@_new_response = ( me, http_response ) ->
+  ### TAINT need to examine status code ###
+  # log TRM.orange ( name for name of http_response ).sort()
+  # log TRM.yellow ( name for name of http_response[ 'request' ] ).sort()
+  http_request  = http_response[ 'request'  ]
+  body          = http_response[ 'body'     ]
+  # body          = JSON.parse body if TYPES.isa_text body
+  request_url   = http_request[ 'href'      ]
+  error         = body[ 'error'             ] ? null
+  header        = body[ 'responseHeader'    ]
+  status        = header[ 'status'          ]
+  dt            = header[ 'QTime'           ]
+  parameters    = header[ 'params'          ] ? {}
+  solr_response = body[ 'response'          ]
+  #.........................................................................................................
+  if solr_response?
+    first_idx     = solr_response[ 'start'    ]
+    results       = solr_response[ 'docs'     ]
+  else
+    first_idx     = null
+    results       = []
+  #.........................................................................................................
+  # log '©7z5', TRM.orange 'body:', body
+  # log '©7z5', TRM.orange 'header:', header
+  # log '©7z5', TRM.yellow ( name for name of http_request ).sort()
+  # log '©7z5', TRM.yellow http_request[ 'headers' ]
+  # log '©7z5', TRM.steel rpr http_status
+  # log '©7z5', TRM.red error if error?
+  # #.........................................................................................................
+  R =
+    '~isa':         'SOLR/response'
+    'url':          request_url
+    'status':       status
+    'error':        error
+    'parameters':   parameters
+    'results':      results
+    'first-idx':    first_idx
+    'dt':           dt
+  #.........................................................................................................
+  return R
+
 
 
 ############################################################################################################

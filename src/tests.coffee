@@ -28,7 +28,7 @@ assert                    = require 'assert'
 #-----------------------------------------------------------------------------------------------------------
 @wrong_update_command = ( test ) ->
   db = SOLR.new_db hostname: '127.0.0.1'
-  log TRM.steel db
+  # log TRM.steel db
   step ( resume ) =>*
     document =
       'id':       '1234'
@@ -36,22 +36,38 @@ assert                    = require 'assert'
     try
       response = yield SOLR.update db, document, resume
     catch error
-      test.done() if ( error[ 'message' ].match /^Unknown command: id/ )?
+      assert ( error[ 'message' ].match /^Unknown command: id/ )?
+      test.done()
 
 #-----------------------------------------------------------------------------------------------------------
 @ok_update_command = ( test ) ->
   db = SOLR.new_db hostname: '127.0.0.1'
-  log TRM.steel db
+  # log TRM.steel db
   step ( resume ) =>*
     document =
       'id':       '1234'
       'name':     'I. C. Wiener'
     documents = [ document, ]
-    try
-      response = yield SOLR.update db, documents, resume
-    catch error
-      test.done() if ( error[ 'message' ].match /^Unknown command: id/ )?
+    response  = yield SOLR.update db, documents, resume
+    delete response[ 'dt' ]
+    # log TRM.plum JSON.stringify response
+    assert.deepEqual response, {"~isa":"SOLR/response","url":"http://127.0.0.1:8983/solr/update/json?commit=true&wt=json","status":0,"error":null,"parameters":{},"results":[],"first-idx":null}
+    test.done()
 
+#-----------------------------------------------------------------------------------------------------------
+@low_level_search = ( test ) ->
+  ### TAINT only works on otherwise empty DB after @ok_update_command has been run
+  ###
+  db = SOLR.new_db hostname: '127.0.0.1'
+  # log TRM.steel db
+  step ( resume ) =>*
+    response  = yield SOLR._search db, '*:*', resume
+    delete response[ 'dt' ]
+    # log TRM.pink JSON.stringify response
+    for document in response[ 'results' ]
+      assert.equal document[ 'id' ], '1234'
+      assert.equal document[ 'name' ], 'I. C. Wiener'
+    test.done()
 
 #-----------------------------------------------------------------------------------------------------------
 # @main = ( test ) ->
@@ -66,4 +82,14 @@ assert                    = require 'assert'
 
 ############################################################################################################
 # async_testing @main
+
+# test = done: ->
+# # @wrong_update_command test
+# # @ok_update_command test
+# @low_level_search test
+
+
+
+
+
 
