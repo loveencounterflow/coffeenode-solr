@@ -35,7 +35,7 @@ database collection—which means that IDs uniquely identify entries across our 
 @_cache_miss_count        = 0
 
 #-----------------------------------------------------------------------------------------------------------
-@assign_new_cache = ( carrier ) ->
+@_assign_new_cache = ( carrier ) ->
   return null unless carrier[ 'use-cache' ] ? yes
   #.........................................................................................................
   carrier[ '%cache' ] =

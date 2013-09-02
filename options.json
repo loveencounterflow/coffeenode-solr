@@ -7,6 +7,6 @@
   "base-route":   "solr",
   "url":          null,
   "result-count":	50,
-  "use-cache":		yes
+  "use-cache":		true
 }
 

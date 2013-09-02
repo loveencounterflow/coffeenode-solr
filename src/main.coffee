@@ -46,7 +46,7 @@ immediately               = setImmediate
 spawn                     = ( require 'child_process' ).spawn
 #...........................................................................................................
 default_options           = require '../options'
-@CACHE                    = require './lib/CACHE'
+@CACHE                    = require './CACHE'
 
 
 #===========================================================================================================
@@ -83,6 +83,8 @@ default_options           = require '../options'
   R =
     '~isa':       'SOLR/db'
     'options':    options
+  #.........................................................................................................
+  @CACHE._assign_new_cache R
   #.........................................................................................................
   return R
 
@@ -130,16 +132,27 @@ default_options           = require '../options'
       sort:   options[ 'sort'         ] ?= 'score desc'
       rows:   options[ 'result-count' ] ?= 10
       start:  options[ 'first-idx'    ] ?= 0
-  #.........................................................................................................
-  @_request me, 'get', request_options, handler
+  #=========================================================================================================
+  @_request me, 'get', request_options, ( error, response ) =>
+    #.......................................................................................................
+    for entry in response[ 'results' ]
+      @CACHE.register me, entry
+    #.......................................................................................................
+    handler null, response
+  #=========================================================================================================
   return null
 
 #-----------------------------------------------------------------------------------------------------------
 @get = ( me, id, fallback, handler ) ->
+  ### Given an `id`, call handler with corresponding value from DB or from cache. When ID is not found in
+  the DB, handler will be called either with an error as first oder `fallback` as second argument. ###
   unless handler?
     handler   = fallback
     ### TAINT: shouldn't use `undefined` ###
     fallback  = undefined
+  #.........................................................................................................
+  misfit  = {}
+  RETRIEVE FROM CACHE
   #=========================================================================================================
   @_search me, "id:#{@quote id}", null, ( error, response ) =>
     return handler error if error?
@@ -151,8 +164,9 @@ default_options           = require '../options'
       Z = fallback
     else
       Z = results[ 0 ]
+    @CACHE.register me, Z
     handler null, Z
-  #.........................................................................................................
+  #=========================================================================================================
   return null
 
 
@@ -189,11 +203,8 @@ default_options           = require '../options'
 #-----------------------------------------------------------------------------------------------------------
 @_new_response = ( me, http_response ) ->
   ### TAINT need to examine status code ###
-  # log TRM.orange ( name for name of http_response ).sort()
-  # log TRM.yellow ( name for name of http_response[ 'request' ] ).sort()
   http_request  = http_response[ 'request'  ]
   body          = http_response[ 'body'     ]
-  # body          = JSON.parse body if TYPES.isa_text body
   request_url   = http_request[ 'href'      ]
   error         = body[ 'error'             ] ? null
   header        = body[ 'responseHeader'    ]
@@ -209,13 +220,6 @@ default_options           = require '../options'
     first_idx     = null
     results       = []
   #.........................................................................................................
-  # log '©7z5', TRM.orange 'body:', body
-  # log '©7z5', TRM.orange 'header:', header
-  # log '©7z5', TRM.yellow ( name for name of http_request ).sort()
-  # log '©7z5', TRM.yellow http_request[ 'headers' ]
-  # log '©7z5', TRM.steel rpr http_status
-  # log '©7z5', TRM.red error if error?
-  # #.........................................................................................................
   R =
     '~isa':         'SOLR/response'
     'url':          request_url

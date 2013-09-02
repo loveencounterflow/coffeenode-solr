@@ -92,6 +92,16 @@ f = ->
       test.done()
 
 #-----------------------------------------------------------------------------------------------------------
+@query = ( test ) ->
+  db = SOLR.new_db()
+  log TRM.orange db
+  SOLR.search db, """key:/has.*/""", ( error, results ) ->
+    bye error if error?
+    log TRM.gold '©8u7', results
+    log TRM.cyan '©8u8', db
+    test.done()
+
+#-----------------------------------------------------------------------------------------------------------
 @escaping = ( test ) ->
   db = null
   assert.equal ( SOLR.escape db, '(1+1):2' ), "\\(1\\+1\\)\\:2"
@@ -107,10 +117,10 @@ f = ->
 #-----------------------------------------------------------------------------------------------------------
 @assign_cache = ( test ) ->
   db = {}
-  CACHE.assign_new_cache db
+  CACHE._assign_new_cache db
   assert.deepEqual db, {"%cache":{"~isa":"SOLR/cache","value-by-id":{},"count-by-type":{},"hit-count":0,"miss-count":0}}
   db = 'use-cache': yes
-  CACHE.assign_new_cache db
+  CACHE._assign_new_cache db
   # log JSON.stringify db
   assert.deepEqual db, {"use-cache":true,"%cache":{"~isa":"SOLR/cache","value-by-id":{},"count-by-type":{},"hit-count":0,"miss-count":0}}
   test.done()
@@ -118,14 +128,14 @@ f = ->
 #-----------------------------------------------------------------------------------------------------------
 @dont_assign_cache = ( test ) ->
   db = 'use-cache': no
-  CACHE.assign_new_cache db
+  CACHE._assign_new_cache db
   # log TRM.yellow db
   assert.deepEqual db, { 'use-cache': false }
   test.done()
 
 #-----------------------------------------------------------------------------------------------------------
 populate_cache = ( db ) ->
-  CACHE.assign_new_cache db
+  CACHE._assign_new_cache db
   CACHE.register db, { id: 'id-1', foo: 42, bar: 'helo', isa: 'fancy' }
   CACHE.register db, { id: 'id-2', ding: yes, dong: no }
   CACHE.register db, { id: 'id-3', key: 'some-key', value: 'a value', isa: 'brunz' }
@@ -177,7 +187,7 @@ populate_cache = ( db ) ->
 ############################################################################################################
 # async_testing @main
 
-test = done: ->
+# test = done: ->
 # @wrong_update_command test
 # @ok_update_command test
 # @low_level_search test
