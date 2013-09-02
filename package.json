@@ -34,7 +34,8 @@
     "%cache": {
       "routes": {
         "lib/main.js": 1,
-        "lib/tests.js": 1
+        "lib/tests.js": 1,
+        "lib/CACHE.js": 1
       }
     }
   },

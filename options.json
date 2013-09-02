@@ -6,6 +6,7 @@
   "port":         "8983",
   "base-route":   "solr",
   "url":          null,
-  "result-count":	50
+  "result-count":	50,
+  "use-cache":		yes
 }
 
