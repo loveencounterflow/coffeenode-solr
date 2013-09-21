@@ -56,13 +56,16 @@ default_options           = require '../options'
   user_options ?= {}
   R             = {}
   #.........................................................................................................
-  ### TAINT: these routes shoud be mage configurable ###
+  ### TAINT: these routes shoud be made configurable ###
   route_by_name =
     'update':         'update/json'
     'query':          'select'
   #.........................................................................................................
-  for name, default_value of default_options
-    R[ name ] = user_options[ name ] ? default_value
+  for name, default_setting of default_options
+    R[ name ] = default_setting
+  #.........................................................................................................
+  for name, user_setting of user_options
+    R[ name ] = user_options[ name ]
   #.........................................................................................................
   base_route    = R[ 'base-route' ].replace /// ^ /* ( .*? ) /* $ ///g, '$1'
   R[ 'urls' ]   = {}
@@ -78,13 +81,10 @@ default_options           = require '../options'
 
 #-----------------------------------------------------------------------------------------------------------
 @new_db = ( user_options ) ->
-  options = @_get_options user_options
+  R = @_get_options user_options
   #.........................................................................................................
-  R =
-    '~isa':       'SOLR/db'
-    'options':    options
-  #.........................................................................................................
-  @CACHE._assign_new_cache R
+  R[ '~isa' ] = 'SOLR/db'
+  @CACHE._assign_new_cache R, user_options[ 'cache-max-entry-count' ]
   #.........................................................................................................
   return R
 
@@ -103,7 +103,7 @@ default_options           = require '../options'
 
 
 #===========================================================================================================
-# SEARCH
+# RETRIEVAL
 #-----------------------------------------------------------------------------------------------------------
 @search = ( me, solr_query, options, handler ) ->
   #.........................................................................................................
@@ -121,22 +121,33 @@ default_options           = require '../options'
   options ?= {}
   #.........................................................................................................
   request_options =
-    url:      me[ 'options' ][ 'urls' ][ 'query' ]
+    url:      me[ 'urls' ][ 'query' ]
     json:     true
     body:     ''
-    # headers:
-    #   'Content-type': 'application/json'
     qs:
       q:      solr_query
       wt:     'json'
       sort:   options[ 'sort'         ] ?= 'score desc'
       rows:   options[ 'result-count' ] ?= 10
       start:  options[ 'first-idx'    ] ?= 0
-  #=========================================================================================================
-  @_request me, 'get', request_options, ( error, response ) =>
+  #.........................................................................................................
+  @_query me, 'get', request_options, ( error, response ) =>
     #.......................................................................................................
-    for entry in response[ 'results' ]
-      @CACHE.register me, entry
+    if me[ 'use-cache' ] ? yes
+      results       = response[ 'results' ]
+      cache         = me[ '%cache' ]
+      value_by_id   = cache[ 'value-by-id' ]
+      #.....................................................................................................
+      for entry, idx in results
+        cached_entry = value_by_id[ entry[ 'id' ] ]
+        if cached_entry?
+          results[ idx ] = cached_entry
+        else
+          results[ idx ] = @CACHE.wrap_and_register me, entry
+    #.......................................................................................................
+    else
+      for entry, idx in results
+        results[ idx ] = @CACHE.wrap_and_register me, entry
     #.......................................................................................................
     handler null, response
   #=========================================================================================================
@@ -150,53 +161,133 @@ default_options           = require '../options'
     handler   = fallback
     ### TAINT: shouldn't use `undefined` ###
     fallback  = undefined
-  #.........................................................................................................
-  misfit  = {}
-  RETRIEVE FROM CACHE
+  #=========================================================================================================
+  @CACHE.retrieve me, id, ( @_get.bind @ ), ( error, Z ) =>
+    if error?
+      if fallback isnt undefined and TEXT.starts_with error[ 'message' ], 'invalid ID: '
+        return handler null, fallback
+      return handler error
+    handler null, Z
+  #=========================================================================================================
+  return null
+
+#-----------------------------------------------------------------------------------------------------------
+@_get = ( me, id, handler ) ->
   #=========================================================================================================
   @_search me, "id:#{@quote id}", null, ( error, response ) =>
     return handler error if error?
     #.......................................................................................................
     results = response[ 'results' ]
+    return handler new Error "invalid ID: #{rpr id}" if results.length is 0
     #.......................................................................................................
-    if results.length is 0
-      return handler new Error "invalid ID: #{rpr id}" if fallback is undefined
-      Z = fallback
-    else
-      Z = results[ 0 ]
-    @CACHE.register me, Z
+    Z = results[ 0 ]
     handler null, Z
   #=========================================================================================================
   return null
-
 
 #===========================================================================================================
 # UPDATES
 #-----------------------------------------------------------------------------------------------------------
 @update = ( me, entries, handler ) ->
-  entries = [ entries, ] unless TYPES.isa_list entries
   #.........................................................................................................
   options =
-    url:      me[ 'options' ][ 'urls' ][ 'update' ]
+    url:      me[ 'urls' ][ 'update' ]
     json:     true
     body:     entries
+    qs:
+      # commit: true
+      commit: false
+      wt:     'json'
+  #.........................................................................................................
+  return @_update me, entries, options, handler
+
+#-----------------------------------------------------------------------------------------------------------
+@update_from_file = ( me, route, content_type, handler ) ->
+# curl "http://localhost:8983/solr/update?stream.file=%2FUsers%2Fflow%2Fcnd%2Fnode_modules%2Fcoffeenode-mojikura%2Fdata%2Fjizura-mojikura.json&stream.contentType=text%2Fjson;charset=utf-8"
+  unless handler?
+    handler       = content_type
+    content_type  = 'text/json;charset=utf-8'
+  #.........................................................................................................
+  options =
+    url:      me[ 'urls' ][ 'update' ]
+    json:     true
+    # body:     entries
+    qs:
+      # commit: true
+      commit: false
+      'stream.file':          route
+      'stream.contentType':   content_type
+  #.........................................................................................................
+  return @_query me, 'post', options, handler
+
+#-----------------------------------------------------------------------------------------------------------
+@_update = ( me, entries, options, handler ) ->
+  ### TAINT: we implicitly modify argument `entries` because of cache entry wrapping. This may cause
+  problems when entries have been referenced outside of the list passed in. ###
+  entries = [ entries, ] unless TYPES.isa_list entries
+  ### KLUDGE: should really use additional argument ###
+  unless entries[ '%dont-modify' ]
+    for idx in [ entries.length - 1 .. 0 ] by -1
+      entry = entries[ idx ]
+      ### JavaScript's way of saying `list.remove idx` ###
+      if entry[ '%is-clean' ] then  entries.splice idx, 1
+      else                          entries[ idx ] = @CACHE.wrap_and_register me, entry
+  #.........................................................................................................
+  return @_query me, 'post', options, ( error, P... ) =>
+    throw error if error?
+    @CACHE._clean me, entry for entry in entries
+    handler null, P...
+
+#-----------------------------------------------------------------------------------------------------------
+@commit = ( me, handler ) ->
+  #.........................................................................................................
+  options =
+    url:      me[ 'urls' ][ 'update' ]
+    json:     true
+    body:     null
+    qs:
+      # commit: true
+      commit: true
+      wt:     'json'
+  #.........................................................................................................
+  @_query me, 'post', options, handler
+  #.........................................................................................................
+  return null
+
+
+#===========================================================================================================
+# REMOVAL
+#-----------------------------------------------------------------------------------------------------------
+@clear = ( me, handler ) ->
+  ### TAINT: it could be argued that the cache should only be cleared upon callback. ###
+  @CACHE.clear me
+  #.........................................................................................................
+  options =
+    url:      me[ 'urls' ][ 'update' ]
+    json:     true
+    body:     { 'delete': { 'query': '*:*' } }
     qs:
       commit: true
       wt:     'json'
   #.........................................................................................................
-  @_request me, 'post', options, handler
+  @_query me, 'post', options, handler
+  #.........................................................................................................
   return null
 
 
 #===========================================================================================================
 # REQUEST HANDLER
 #-----------------------------------------------------------------------------------------------------------
-@_request = ( me, method, options, handler ) ->
-  #=========================================================================================================
+@_query = ( me, method, options, handler ) ->
+  #.........................................................................................................
   mik_request[ method ] options, ( error, response ) =>
     return handler error if error?
     Z = @_new_response me, response
-    if Z[ 'error' ] is null then handler null, Z else handler new Error Z[ 'error' ][ 'msg' ]
+    log TRM.pink '©5l2', Z[ 'url' ]
+    if Z[ 'error' ] is null
+      handler null, Z
+    else
+      handler new Error Z[ 'error' ][ 'msg' ]
   #.........................................................................................................
   return null
 
