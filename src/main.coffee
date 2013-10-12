@@ -131,6 +131,42 @@ default_options           = require '../options'
   @_query me, 'get', request_options, handler
   return null
 
+
+#-----------------------------------------------------------------------------------------------------------
+@batch_search = ( me, query, options, handler ) ->
+  ### Method to simplify paging over vast amounts of data. In this method, `options` is a mandatory
+  argument, but it may be an empty object. With each iteration, its attributes `first-idx` and `page-nr`
+  will be updated to reflect the current state; it is possible to re-set `options[ 'first-idx' ]` and / or
+  `options[ 'result-count' ]` to influence the outcome of the next iteration.
+
+  Besides the error as the customary first callback argument, the handler will be called with a list
+  containing the documents of the current iteration or `null` in case the query has been exhausted. This
+  means that the call may be conveniently placed inside a suspend-style `while` loop, as shown below.
+
+  Usage example:
+
+      f = ->
+        step ( resume ) ->*
+          db      = MOJIKURA.new_db()
+          query   = ...
+          options =
+            'result-count':     15000
+          #.......................................................................
+          while ( batch = yield SOLR.batch_search db, query, options, resume )
+            log TRM.green options, TRM.pink batch.length
+
+  ###
+  result_count  = options[ 'result-count' ]?= 500
+  first_idx     = options[ 'first-idx'    ] = ( options[ 'first-idx' ] ? -result_count ) + result_count
+  page_nr       = options[ 'page-nr'      ] = ( options[ 'page-nr'   ] ?             0 ) + 1
+  #.........................................................................................................
+  @search me, query, options, ( error, response ) ->
+    return handler error if error?
+    #.......................................................................................................
+    handler null, if response[ 'results' ].length is 0 then null else response
+  #.........................................................................................................
+  return null
+
 #-----------------------------------------------------------------------------------------------------------
 @get = ( me, id, fallback, handler ) ->
   ### Given an `id`, call handler with corresponding value from DB or from cache. When ID is not found in
