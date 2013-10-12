@@ -46,7 +46,6 @@ immediately               = setImmediate
 spawn                     = ( require 'child_process' ).spawn
 #...........................................................................................................
 default_options           = require '../options'
-@CACHE                    = require './CACHE'
 
 
 #===========================================================================================================
@@ -81,11 +80,8 @@ default_options           = require '../options'
 
 #-----------------------------------------------------------------------------------------------------------
 @new_db = ( user_options ) ->
-  R = @_get_options user_options
-  #.........................................................................................................
+  R           = @_get_options user_options
   R[ '~isa' ] = 'SOLR/db'
-  @CACHE._assign_new_cache R, user_options[ 'cache-max-entry-count' ]
-  #.........................................................................................................
   return R
 
 
@@ -127,30 +123,12 @@ default_options           = require '../options'
     qs:
       q:      solr_query
       wt:     'json'
-      sort:   options[ 'sort'         ] ?= 'score desc'
-      rows:   options[ 'result-count' ] ?= 10
+      # sort:   options[ 'sort'         ] ?= 'score desc'
+      rows:   options[ 'result-count' ] ?= 1e6
       start:  options[ 'first-idx'    ] ?= 0
   #.........................................................................................................
-  @_query me, 'get', request_options, ( error, response ) =>
-    #.......................................................................................................
-    if me[ 'use-cache' ] ? yes
-      results       = response[ 'results' ]
-      cache         = me[ '%cache' ]
-      value_by_id   = cache[ 'value-by-id' ]
-      #.....................................................................................................
-      for entry, idx in results
-        cached_entry = value_by_id[ entry[ 'id' ] ]
-        if cached_entry?
-          results[ idx ] = cached_entry
-        else
-          results[ idx ] = @CACHE.wrap_and_register me, entry
-    #.......................................................................................................
-    else
-      for entry, idx in results
-        results[ idx ] = @CACHE.wrap_and_register me, entry
-    #.......................................................................................................
-    handler null, response
-  #=========================================================================================================
+  # log TRM.cyan '©5t1', request_options
+  @_query me, 'get', request_options, handler
   return null
 
 #-----------------------------------------------------------------------------------------------------------
@@ -161,19 +139,19 @@ default_options           = require '../options'
     handler   = fallback
     ### TAINT: shouldn't use `undefined` ###
     fallback  = undefined
-  #=========================================================================================================
-  @CACHE.retrieve me, id, ( @_get.bind @ ), ( error, Z ) =>
+  #.........................................................................................................
+  @_get me, id, ( error, Z ) =>
     if error?
       if fallback isnt undefined and TEXT.starts_with error[ 'message' ], 'invalid ID: '
         return handler null, fallback
       return handler error
     handler null, Z
-  #=========================================================================================================
+  #.........................................................................................................
   return null
 
 #-----------------------------------------------------------------------------------------------------------
 @_get = ( me, id, handler ) ->
-  #=========================================================================================================
+  #.........................................................................................................
   @_search me, "id:#{@quote id}", null, ( error, response ) =>
     return handler error if error?
     #.......................................................................................................
@@ -182,13 +160,14 @@ default_options           = require '../options'
     #.......................................................................................................
     Z = results[ 0 ]
     handler null, Z
-  #=========================================================================================================
+  #.........................................................................................................
   return null
 
 #===========================================================================================================
 # UPDATES
 #-----------------------------------------------------------------------------------------------------------
 @update = ( me, entries, handler ) ->
+  entries = [ entries ] unless TYPES.isa_list entries
   #.........................................................................................................
   options =
     url:      me[ 'urls' ][ 'update' ]
@@ -222,21 +201,12 @@ default_options           = require '../options'
 
 #-----------------------------------------------------------------------------------------------------------
 @_update = ( me, entries, options, handler ) ->
-  ### TAINT: we implicitly modify argument `entries` because of cache entry wrapping. This may cause
-  problems when entries have been referenced outside of the list passed in. ###
-  entries = [ entries, ] unless TYPES.isa_list entries
-  ### KLUDGE: should really use additional argument ###
-  unless entries[ '%dont-modify' ]
-    for idx in [ entries.length - 1 .. 0 ] by -1
-      entry = entries[ idx ]
-      ### JavaScript's way of saying `list.remove idx` ###
-      if entry[ '%is-clean' ] then  entries.splice idx, 1
-      else                          entries[ idx ] = @CACHE.wrap_and_register me, entry
   #.........................................................................................................
-  return @_query me, 'post', options, ( error, P... ) =>
+  @_query me, 'post', options, ( error, P... ) =>
     throw error if error?
-    @CACHE._clean me, entry for entry in entries
     handler null, P...
+  #.........................................................................................................
+  return null
 
 #-----------------------------------------------------------------------------------------------------------
 @commit = ( me, handler ) ->
@@ -259,8 +229,6 @@ default_options           = require '../options'
 # REMOVAL
 #-----------------------------------------------------------------------------------------------------------
 @clear = ( me, handler ) ->
-  ### TAINT: it could be argued that the cache should only be cleared upon callback. ###
-  @CACHE.clear me
   #.........................................................................................................
   options =
     url:      me[ 'urls' ][ 'update' ]
@@ -283,17 +251,22 @@ default_options           = require '../options'
   mik_request[ method ] options, ( error, response ) =>
     return handler error if error?
     Z = @_new_response me, response
-    log TRM.pink '©5l2', Z[ 'url' ]
-    if Z[ 'error' ] is null
-      handler null, Z
+    # return handler Z[ 'error' ] if Z[ 'error' ]?
+    # log TRM.pink '©5l2', Z
+    if ( error = Z[ 'error' ] )?
+      ### Some Solr errors do not come with a trace in error[ 'trace' ]... ###
+      trace = error[ 'trace' ] ? error[ 'msg' ]
+      trace = ( ( trace.split /\n/g )[ .. 10 ].join '\n' ).concat '\n...\n'
+      handler new Error 'Lucene/Solr error:\n'.concat error[ 'msg' ], '\n', trace
     else
-      handler new Error Z[ 'error' ][ 'msg' ]
+      handler null, Z
   #.........................................................................................................
   return null
 
 #-----------------------------------------------------------------------------------------------------------
 @_new_response = ( me, http_response ) ->
   ### TAINT need to examine status code ###
+  # log http_response
   http_request  = http_response[ 'request'  ]
   body          = http_response[ 'body'     ]
   request_url   = http_request[ 'href'      ]
