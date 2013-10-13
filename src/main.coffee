@@ -6,21 +6,6 @@ all stored values (entries) must be JavaScript objects / PODs and serializable w
 
 each entry *must* have a member `id` (a string) that is unique across the entire collection
 
-each entry *should* have a member `isa` (a string) that specifies the type of the entry
-
-unless `use-cache: no` is specified in the database object, all updates and retrievals will be cached to
-ensure object identity (i.e. `( SOLR.get db_1, id_1 ) == ( SOLR.get db_2, id_2 )` will hold exactly when
-`( db_1 == db_2 ) and ( id_1 == id_2 )` holds).
-
-With `use-cache: no`, each `get` (and `search` etc) operation will return a new object, i.e.
-`SOLR.get db_1, id_1 != SOLR.get db_2, id_2` will hold for any legal values of `db_1`, `db_2`, `id_1`,
-`id_2`.
-
-Note that this means that you may end up with the entire database content in memory if a single `db`
-object is used extensively.
-
-There is at present no way to invalidate cache entries or automatically update entries in the database that
-were modified in the application.
 
 ###
 
@@ -124,13 +109,34 @@ default_options           = require '../options'
       q:      solr_query
       wt:     'json'
       # sort:   options[ 'sort'         ] ?= 'score desc'
-      rows:   options[ 'result-count' ] ?= 1e6
-      start:  options[ 'first-idx'    ] ?= 0
+      rows:   options[ 'result-count' ] ? 100
+      start:  options[ 'first-idx'    ] ? 0
+  #.........................................................................................................
+  if ( fields = options[ 'fields' ] )?
+    switch type = TYPES.type_of fields
+      when 'text' then fields = fields.split /\s*,\s*|\s+/
+      when 'list' then null
+      else return handler new Error "unknown type for option 'fields': #{type}"
+    request_options[ 'qs' ][ 'fl' ] = fields.join ','
   #.........................................................................................................
   # log TRM.cyan '©5t1', request_options
   @_query me, 'get', request_options, handler
   return null
 
+#-----------------------------------------------------------------------------------------------------------
+@count = ( me, solr_query, options, handler ) ->
+  unless handler?
+    handler = options
+    options = null
+  #.........................................................................................................
+  options = if options? then Object.create options else {}
+  options[ 'result-count' ] = 0
+  #.........................................................................................................
+  @_search me, solr_query, options, ( error, response ) ->
+    return handler error if error?
+    handler null, response[ 'count' ]
+  #.........................................................................................................
+  return null
 
 #-----------------------------------------------------------------------------------------------------------
 @batch_search = ( me, query, options, handler ) ->
@@ -199,6 +205,7 @@ default_options           = require '../options'
   #.........................................................................................................
   return null
 
+
 #===========================================================================================================
 # UPDATES
 #-----------------------------------------------------------------------------------------------------------
@@ -218,7 +225,6 @@ default_options           = require '../options'
 
 #-----------------------------------------------------------------------------------------------------------
 @update_from_file = ( me, route, content_type, handler ) ->
-# curl "http://localhost:8983/solr/update?stream.file=%2FUsers%2Fflow%2Fcnd%2Fnode_modules%2Fcoffeenode-mojikura%2Fdata%2Fjizura-mojikura.json&stream.contentType=text%2Fjson;charset=utf-8"
   unless handler?
     handler       = content_type
     content_type  = 'text/json;charset=utf-8'
@@ -303,20 +309,22 @@ default_options           = require '../options'
 @_new_response = ( me, http_response ) ->
   ### TAINT need to examine status code ###
   # log http_response
-  http_request  = http_response[ 'request'  ]
-  body          = http_response[ 'body'     ]
-  request_url   = http_request[ 'href'      ]
-  error         = body[ 'error'             ] ? null
-  header        = body[ 'responseHeader'    ]
-  status        = header[ 'status'          ]
-  dt            = header[ 'QTime'           ]
-  parameters    = header[ 'params'          ] ? {}
-  solr_response = body[ 'response'          ]
+  http_request  = http_response[  'request'         ]
+  body          = http_response[  'body'            ]
+  request_url   = http_request[   'href'            ]
+  error         = body[           'error'           ] ? null
+  header        = body[           'responseHeader'  ]
+  status        = header[         'status'          ]
+  dt            = header[         'QTime'           ]
+  parameters    = header[         'params'          ] ? {}
+  solr_response = body[           'response'        ]
   #.........................................................................................................
   if solr_response?
+    count         = solr_response[  'numFound'        ]
     first_idx     = solr_response[ 'start'    ]
     results       = solr_response[ 'docs'     ]
   else
+    count         = 0
     first_idx     = null
     results       = []
   #.........................................................................................................
@@ -327,6 +335,7 @@ default_options           = require '../options'
     'error':        error
     'parameters':   parameters
     'results':      results
+    'count':        count
     'first-idx':    first_idx
     'dt':           dt
   #.........................................................................................................
