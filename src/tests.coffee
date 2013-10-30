@@ -8,7 +8,7 @@
 # mik_request               = require 'request' # https://github.com/mikeal/request
 #...........................................................................................................
 SOLR                      = require '..'
-CACHE                     = require './CACHE'
+# CACHE                     = require './CACHE'
 TEXT                      = require 'coffeenode-text'
 TYPES                     = require 'coffeenode-types'
 TRM                       = require 'coffeenode-trm'
@@ -361,7 +361,12 @@ populate_cache = ( db ) ->
     assert value is value_id_88
     test.done()
 
-
+# #-----------------------------------------------------------------------------------------------------------
+# @clear_fields = ( test ) ->
+#   db      = SOLR.new_db()
+#   SOLR.clear_fields db, 'factorial', ( error, report ) ->
+#     throw error if error?
+#     log report
 
 
 ############################################################################################################
@@ -388,7 +393,7 @@ test = done: ->
 # @using_async_retrieve_with_fallback     test
 # @using_sync_retrieve                    test
 # @using_sync_retrieve_with_fallback      test
-
+@clear_fields                           test
 
 
 

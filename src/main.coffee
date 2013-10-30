@@ -11,8 +11,8 @@ each entry *must* have a member `id` (a string) that is unique across the entire
 
 
 ############################################################################################################
-njs_os                    = require 'os'
-njs_fs                    = require 'fs'
+# njs_os                    = require 'os'
+# njs_fs                    = require 'fs'
 njs_path                  = require 'path'
 njs_url                   = require 'url'
 mik_request               = require 'request' # https://github.com/mikeal/request
@@ -24,11 +24,11 @@ log                       = TRM.log.bind TRM
 rpr                       = TRM.rpr.bind TRM
 echo                      = TRM.echo.bind TRM
 #...........................................................................................................
-suspend                   = require 'coffeenode-suspend'
-step                      = suspend.step
-collect                   = suspend.collect
-immediately               = setImmediate
-spawn                     = ( require 'child_process' ).spawn
+# suspend                   = require 'coffeenode-suspend'
+# step                      = suspend.step
+# collect                   = suspend.collect
+# immediately               = setImmediate
+# spawn                     = ( require 'child_process' ).spawn
 #...........................................................................................................
 default_options           = require '../options'
 
@@ -283,6 +283,26 @@ default_options           = require '../options'
   @_query me, 'post', options, handler
   #.........................................................................................................
   return null
+
+# #-----------------------------------------------------------------------------------------------------------
+# @clear_fields = ( me, field_names, handler ) ->
+#   field_names   = [ field_names, ] unless TYPES.isa_list field_names
+#   delete_fields = []
+#   for field_name in field_names
+#     delete_fields.push ( @escape field_name ).concat ':*'
+#   delete_fields = delete_fields.join ' OR '
+#   #.........................................................................................................
+#   options =
+#     url:      me[ 'urls' ][ 'update' ]
+#     json:     true
+#     body:     { 'delete': { 'query': delete_fields } }
+#     qs:
+#       commit: true
+#       wt:     'json'
+#   #.........................................................................................................
+#   @_query me, 'post', options, handler
+#   #.........................................................................................................
+#   return null
 
 
 #===========================================================================================================
